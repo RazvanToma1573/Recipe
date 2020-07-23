@@ -1,15 +1,23 @@
 package razvan.toma.recipe.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import razvan.toma.recipe.Service.RecipeService;
 
 @Controller
 public class IndexController {
 
-    @RequestMapping({"/", "", "/index"})
-    public String getIndexPage() {
+    private final RecipeService recipeService;
 
-        System.out.println("I got here!!! Everything is cool!!! No, you are cooler!!!");
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
+    @RequestMapping({"/", "", "/index"})
+    public String getIndexPage(Model model) {
+
+        model.addAttribute("recipes", recipeService.getRecipies());
 
         return "index";
     }
