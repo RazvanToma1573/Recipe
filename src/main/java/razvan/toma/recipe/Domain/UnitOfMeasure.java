@@ -1,10 +1,13 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.Builder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Builder
 @Entity
 public class UnitOfMeasure {
 

@@ -1,7 +1,10 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 
+@Builder
 @Entity
 public class Notes {
 

@@ -1,9 +1,12 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 @Entity
 public class Recipe {
 
