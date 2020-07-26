@@ -1,10 +1,14 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 public class Ingredient {
@@ -12,9 +16,6 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public Ingredient() {
-    }
 
     private String description;
     private BigDecimal amount;

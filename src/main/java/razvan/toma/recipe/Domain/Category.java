@@ -1,10 +1,14 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 public class Category {
@@ -17,9 +21,6 @@ public class Category {
 
     @ManyToMany(mappedBy = "categorySet")
     private Set<Recipe> recipes;
-
-    public Category() {
-    }
 
     public Long getId() {
         return id;

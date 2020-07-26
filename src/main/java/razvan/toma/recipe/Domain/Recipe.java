@@ -1,11 +1,15 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 public class Recipe {
@@ -41,8 +45,6 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categorySet = new HashSet<>();
 
-    public Recipe() {
-    }
 
     public Long getId() {
         return id;

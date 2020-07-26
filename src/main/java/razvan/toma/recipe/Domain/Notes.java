@@ -1,9 +1,13 @@
 package razvan.toma.recipe.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 public class Notes {
@@ -17,9 +21,6 @@ public class Notes {
 
     @Lob
     private String recipeNotes;
-
-    public Notes() {
-    }
 
     public Long getId() {
         return id;
