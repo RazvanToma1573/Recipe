@@ -5,6 +5,7 @@ import razvan.toma.recipe.Domain.Recipe;
 import razvan.toma.recipe.Repository.RecipeRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,5 +22,11 @@ public class RecipeServiceImpl implements RecipeService {
         Set<Recipe> recipes = new HashSet<>();
         recipeRepository.findAll().forEach(recipes::add);
         return recipes;
+    }
+
+    @Override
+    public Recipe findById(Long id) {
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        return optionalRecipe.orElse(null);
     }
 }
