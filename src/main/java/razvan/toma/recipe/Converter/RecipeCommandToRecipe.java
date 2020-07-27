@@ -40,8 +40,8 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         Set<Category> convertedCategories = new HashSet<>();
         Set<Ingredient> convertedIngredients = new HashSet<>();
 
-        Set<CategoryCommand> categoryCommands = source.getCategorySet();
-        Set<IngredientCommand> ingredientCommands = source.getIngredientSet();
+        Set<CategoryCommand> categoryCommands = source.getCategories();
+        Set<IngredientCommand> ingredientCommands = source.getIngredients();
 
         if (categoryCommands != null && categoryCommands.size() > 1) {
             categoryCommands.forEach(categoryCommand -> {
@@ -66,8 +66,8 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
                 .url(source.getUrl())
                 .directions(source.getDirections())
                 .notes(notesCommandToNotes.convert(source.getNotes()))
-                .categorySet(convertedCategories)
-                .ingredientSet(convertedIngredients)
+                .categories(convertedCategories)
+                .ingredients(convertedIngredients)
                 .build();
 
         return recipe;

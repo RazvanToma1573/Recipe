@@ -25,19 +25,23 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
             return null;
         }
 
-        final Ingredient ingredient = Ingredient.builder()
-                .id(source.getId())
-                .amount(source.getAmount())
-                .description(source.getDescription())
-                .unitOfMeasure(unitOfMeasureCommandToUnitOfMeasure.convert(source.getUnitOfMeasure()))
-                .build();
+        if (source == null) {
+            return null;
+        }
 
-        if (source.getRecipeId() != null) {
-            Recipe recipe = Recipe.builder().id(source.getRecipeId()).build();
+        final Ingredient ingredient = new Ingredient();
+        ingredient.setId(source.getId());
+
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
             ingredient.setRecipe(recipe);
             recipe.addIngredient(ingredient);
         }
 
+        ingredient.setAmount(source.getAmount());
+        ingredient.setDescription(source.getDescription());
+        ingredient.setUom(unitOfMeasureCommandToUnitOfMeasure.convert(source.getUom()));
         return ingredient;
     }
 
