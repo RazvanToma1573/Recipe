@@ -8,14 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import razvan.toma.recipe.Converter.RecipeCommandToRecipe;
 import razvan.toma.recipe.Converter.RecipeToRecipeCommand;
 import razvan.toma.recipe.Domain.Recipe;
+import razvan.toma.recipe.Exception.NotFoundException;
 import razvan.toma.recipe.Repository.RecipeRepository;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -51,6 +51,19 @@ class RecipeServiceImplTest {
         assertNotNull(recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void getRecipeByIdTestNotFound() throws Exception {
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        assertThrows(NotFoundException.class, () -> {
+            recipeService.findById(1L);
+        });
+
+        //should go boom
     }
 
     @Test

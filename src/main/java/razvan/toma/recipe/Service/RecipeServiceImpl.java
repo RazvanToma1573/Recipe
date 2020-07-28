@@ -6,6 +6,7 @@ import razvan.toma.recipe.Command.RecipeCommand;
 import razvan.toma.recipe.Converter.RecipeCommandToRecipe;
 import razvan.toma.recipe.Converter.RecipeToRecipeCommand;
 import razvan.toma.recipe.Domain.Recipe;
+import razvan.toma.recipe.Exception.NotFoundException;
 import razvan.toma.recipe.Repository.RecipeRepository;
 
 import java.util.HashSet;
@@ -36,7 +37,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe findById(Long id) {
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
-        return optionalRecipe.orElse(null);
+        return optionalRecipe.orElseThrow(NotFoundException::new);
     }
 
     @Override

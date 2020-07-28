@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import razvan.toma.recipe.Command.RecipeCommand;
 import razvan.toma.recipe.Domain.Recipe;
+import razvan.toma.recipe.Exception.NotFoundException;
 import razvan.toma.recipe.Service.RecipeService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -46,6 +47,17 @@ class RecipeControllerTest {
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
     }
+
+    @Test
+    void testGetRecipeNotFound() throws Exception {
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
+    }
+
 
     @Test
     void testPostNewRecipeForm() throws Exception {
